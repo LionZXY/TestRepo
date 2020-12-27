@@ -7,9 +7,9 @@ on:
   issue_comment:
     types: [ created ]
   issues:
-    types: [ opened, edited, pinned, closed, reopened, assigned, labeled ]
+    types: [ opened, edited, closed, reopened ]
   pull_request:
-    types: [ opened, closed, edited, ready_for_review, review_requested, reopened ]
+    types: [ opened, ready_for_review, review_requested, reopened ]
   pull_request_review_comment:
     types: [ created ]
   push:
@@ -27,6 +27,36 @@ jobs:
         uses: ./.github/actions/tg
         with:
           text: "🗣 Комментарий от @${{ github.event.comment.user.login }} в [${{ github.event.issue.title }}](${{ github.event.issue.html_url }}) - ${{ github.event.comment.body }}"
+          token: ${{ secrets.TELEGRAM_DEV_BOT_TOKEN }}
+      - name: Notify about new issue
+        if: ${{ github.event_name == 'issue' && github.event.action == 'opened'}}
+        uses: ./.github/actions/tg
+        with:
+          text: "👾 Задач привалило: [${{ github.event.issue.title }}](${{ github.event.issue.html_url }}) от @${{ github.event.issue.user.login }}"
+          token: ${{ secrets.TELEGRAM_DEV_BOT_TOKEN }}
+      - name: Notify about edit issue
+        if: ${{ github.event_name == 'issue' && github.event.action == 'edited'}}
+        uses: ./.github/actions/tg
+        with:
+          text: "🗒 Обновлена задача: [${{ github.event.issue.title }}](${{ github.event.issue.html_url }})"
+          token: ${{ secrets.TELEGRAM_DEV_BOT_TOKEN }}
+      - name: Notify about issue closed
+        if: ${{ github.event_name == 'issue' && github.event.action == 'closed'}}
+        uses: ./.github/actions/tg
+        with:
+          text: "🏁 Грац! Закрыта задача: [${{ github.event.issue.title }}](${{ github.event.issue.html_url }})"
+          token: ${{ secrets.TELEGRAM_DEV_BOT_TOKEN }}
+      - name: Notify about issue reopen
+        if: ${{ github.event_name == 'issue' && github.event.action == 'reopened'}}
+        uses: ./.github/actions/tg
+        with:
+          text: "♻️ Что-то не доделали в задаче, снова открыта: [${{ github.event.issue.title }}](${{ github.event.issue.html_url }})"
+          token: ${{ secrets.TELEGRAM_DEV_BOT_TOKEN }}
+      - name: Notify about PR open
+        if: ${{ github.event_name == 'pull_request' && github.event.action == 'opened'}}
+        uses: ./.github/actions/tg
+        with:
+          text: "🛠 Nickname хочет влить "
           token: ${{ secrets.TELEGRAM_DEV_BOT_TOKEN }}
       - name: Notify about push
         if: always()
