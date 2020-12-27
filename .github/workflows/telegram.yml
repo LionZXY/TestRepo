@@ -23,7 +23,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Notify about issue comment
-        if: ${{ github.event_name == 'pull_request' && github.event.action == 'created'}}
+        if: ${{ github.event_name == 'issue_comment' && github.event.action == 'created'}}
         uses: ./.github/actions/tg
         with:
           text: "🗣 Комментарий от @${{ github.event.comment.user.login }} в [${{ github.event.issue.title }}](${{ github.event.issue.html_url }}) - ${{ github.event.comment.body }}"
