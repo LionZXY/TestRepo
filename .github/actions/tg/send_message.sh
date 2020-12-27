@@ -6,5 +6,5 @@ TEXT=$3
 
 curl -X POST \
     -H 'Content-Type: application/json' \
-    -d "{\"chat_id\": \"$CHAT_ID\", \"text\": \"$TEXT\", \"parse_mode\":\"Markdown\"}" \
+    -d "{\"chat_id\": \"$CHAT_ID\", \"parse_mode\":\"markdown\", \"text\": \"$TEXT\"}" \
     "https://api.telegram.org/bot$TOKEN/sendMessage"
