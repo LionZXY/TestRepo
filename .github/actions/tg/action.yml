@@ -1,0 +1,14 @@
+name: 'Send message to Telegram'
+inputs:
+  token:
+    description: "Token bot"
+    required: true
+  text:
+    description: 'The message that will be sent to telegram.'
+    required: true
+description: 'Action for send message in Telegram'
+runs:
+  using: 'composite'
+  steps:
+    - run: $GITHUB_ACTION_PATH/send_message.sh ${{ inputs.token }} -324719594 ${{ inputs.text }}
+      shell: bash
