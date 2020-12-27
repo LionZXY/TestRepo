@@ -26,5 +26,5 @@ jobs:
         if: always()
         uses: ./.github/actions/tg
         with:
-          text: "🗣 Комментарий от ${{ github.event.issue_comment.comment.user.login }} в ${{ github.event.issue_comment.issue.title }}"
+          text: "🗣 Комментарий от ${{ github.event }}"
           token: ${{ secrets.TELEGRAM_DEV_BOT_TOKEN }}
