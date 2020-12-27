@@ -10,5 +10,5 @@ description: 'Action for send message in Telegram'
 runs:
   using: 'composite'
   steps:
-    - run: $GITHUB_ACTION_PATH/send_message.sh ${{ inputs.token }} -324719594 ${{ inputs.text }}
+    - run: $GITHUB_ACTION_PATH/send_message.sh ${{ inputs.token }} -324719594 "${{ inputs.text }}"
       shell: bash
