@@ -28,3 +28,6 @@ jobs:
         with:
           text: "🗣 Комментарий от ${{ github.event.issue }}"
           token: ${{ secrets.TELEGRAM_DEV_BOT_TOKEN }}
+      - name: Notify about push
+          if: always()
+          uses: hmarr/debug-action
