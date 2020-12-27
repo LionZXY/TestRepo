@@ -26,7 +26,7 @@ jobs:
         if: always()
         uses: ./.github/actions/tg
         with:
-          text: "🗣 Комментарий от ${{ github.event.issue }}"
+          text: "🗣 Комментарий от @${{ github.event.comment.user.login }} в [${{ github.event.issue.title }}](${{ github.event.issue.html_url }})"
           token: ${{ secrets.TELEGRAM_DEV_BOT_TOKEN }}
       - name: Notify about push
         if: always()
