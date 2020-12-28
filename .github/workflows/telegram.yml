@@ -58,6 +58,12 @@ jobs:
         with:
           text: "🛠 @${{ github.event.pull_request.user.login}} хочет влить [${{ github.event.pull_request.title}}](${{ github.event.pull_request.html_url}})"
           token: ${{ secrets.TELEGRAM_DEV_BOT_TOKEN }}
+      - name: Notify about push in master
+        if: ${{ github.event_name == 'push' && github.event.ref == 'refs/heads/master'}}
+        uses: ./.github/actions/tg
+        with:
+          text: "💚 Новый пуш ${{ github.event.head_commit.message}} в мастере от @${{ github.event.head_commit.author.username}}"
+          token: ${{ secrets.TELEGRAM_DEV_BOT_TOKEN }}
       - name: Notify about push
         if: always()
         uses: hmarr/debug-action@v1.0.0
