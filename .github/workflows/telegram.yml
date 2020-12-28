@@ -56,7 +56,7 @@ jobs:
         if: ${{ github.event_name == 'pull_request' && github.event.action == 'opened'}}
         uses: ./.github/actions/tg
         with:
-          text: "🛠 Nickname хочет влить "
+          text: "🛠 @${{ github.event.pull_request.user.login}} хочет влить [${{ github.event.pull_request.title}}](${{ github.event.pull_request.html_url}})"
           token: ${{ secrets.TELEGRAM_DEV_BOT_TOKEN }}
       - name: Notify about push
         if: always()
