@@ -9,6 +9,10 @@ inputs:
 description: 'Action for send message in Telegram'
 runs:
   using: 'composite'
+  env:
+    TG_TOKEN: ${{ inputs.token }}
+    CHAT_ID: -324719594
+    TEXT: ${{ inputs.text }}
   steps:
-    - run: $GITHUB_ACTION_PATH/send_message.sh ${{ inputs.token }} -324719594 "${{ inputs.text }}"
+    - run: $GITHUB_ACTION_PATH/send_message.sh
       shell: bash
