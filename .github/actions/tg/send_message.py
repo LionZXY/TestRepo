@@ -6,7 +6,7 @@ import os
 text = os.environ['TEXT']
 print(text)
 payload = {'chat_id': os.environ['CHAT_ID'], 'parse_mode': 'markdown', 'disable_web_page_preview': True, 'text': str(text)} 
-json_payload =  json.dumps(payload, ensure_ascii=False)
+json_payload =  json.dumps(payload, ensure_ascii=False).encode('utf8')
 
 print(json_payload)
 
