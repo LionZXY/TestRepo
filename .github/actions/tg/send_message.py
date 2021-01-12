@@ -1,5 +1,4 @@
-from urllib.parse import urlencode
-from urllib.request import Request, urlopen
+import http.client
 import json
 import os
 
@@ -10,7 +9,6 @@ json_payload =  json.dumps(payload).encode('utf8')
 print(json_payload)
 print(url)
 
-request = Request('https://enlesz7htgigo.x.pipedream.net/', data=json_payload,
-                 headers={'content-type': 'application/json'})
-response = urlopen(request).read().decode('utf8')
+conn = http.client.HTTPSConnection('enlesz7htgigo.x.pipedream.net')
+response = conn.request("POST", "/", json_payload, {'Content-Type': 'application/json'})
 print(response)
