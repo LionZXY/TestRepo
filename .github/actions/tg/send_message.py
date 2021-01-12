@@ -11,4 +11,5 @@ print(url)
 
 conn = http.client.HTTPSConnection('api.telegram.org')
 conn.request("POST", '/bot'+ os.environ['TG_TOKEN'] + '/sendMessage', json_payload, {'Content-Type': 'application/json'})
-print(conn.getresponse())
+response = conn.getresponse()
+print(json.loads(response.read().decode()))
