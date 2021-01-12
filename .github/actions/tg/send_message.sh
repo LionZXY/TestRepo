@@ -10,8 +10,10 @@ LOCAL_TEXT=$(json_escape $TEXT)
 echo $LOCAL_TG_TOKEN
 echo $LOCAL_CHAT_ID
 echo $LOCAL_TEXT
+echo $CHAT_ID
+
 
 curl -X POST \
     -H 'Content-Type: application/json' \
-    -d "{\"chat_id\": \"$LOCAL_CHAT_ID\", \"parse_mode\":\"markdown\", \"disable_web_page_preview\":true, \"text\": \"$LOCAL_TEXT\"}" \
+    -d "{\"chat_id\": $LOCAL_CHAT_ID, \"parse_mode\":\"markdown\", \"disable_web_page_preview\":true, \"text\": $LOCAL_TEXT}" \
     "https://api.telegram.org/bot$CHAT_ID/sendMessage"
