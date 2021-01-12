@@ -7,6 +7,9 @@ json_escape () {
 LOCAL_TG_TOKEN=$(json_escape $TG_TOKEN)
 LOCAL_CHAT_ID=$(json_escape $CHAT_ID)
 LOCAL_TEXT=$(json_escape $TEXT)
+echo $LOCAL_TG_TOKEN
+echo $LOCAL_CHAT_ID
+echo $LOCAL_TEXT
 
 curl -X POST \
     -H 'Content-Type: application/json' \
