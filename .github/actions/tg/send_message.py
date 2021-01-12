@@ -1,4 +1,3 @@
-from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
 url = 'https://api.telegram.org/bot'+ os.environ['TG_TOKEN'] + '/sendMessage'
