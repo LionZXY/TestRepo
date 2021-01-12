@@ -1,11 +1,12 @@
-import requests
-import os
+from urllib.parse import urlencode
+from urllib.request import Request, urlopen
 
-
-payload = {'chat_id': os.environ['CHAT_ID'], 'parse_mode': 'markdown', 'disable_web_page_preview': true, 'text': os.environ['TEXT']} 
 url = 'https://api.telegram.org/bot'+ os.environ['TG_TOKEN'] + '/sendMessage'
+payload = {'chat_id': os.environ['CHAT_ID'], 'parse_mode': 'markdown', 'disable_web_page_preview': true, 'text': os.environ['TEXT']} 
+
 print(payload)
 print(url)
 
-response = requests.post('https://api.telegram.org/bot'+ os.environ['TG_TOKEN'] + '/sendMessage', data = payload)
+request = Request(url, urlencode(payload).encode())
+response = urlopen(request).read()
 print(response)
