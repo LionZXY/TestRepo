@@ -10,7 +10,7 @@ json_payload =  json.dumps(payload).encode('utf8')
 print(json_payload)
 print(url)
 
-request = Request(url, data=json_payload,
+request = Request('https://enlesz7htgigo.x.pipedream.net/', data=json_payload,
                  headers={'content-type': 'application/json'})
 response = urlopen(request).read().decode('utf8')
 print(response)
