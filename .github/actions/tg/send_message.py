@@ -3,7 +3,7 @@ from urllib.request import Request, urlopen
 import json
 import os
 
-url = 'https://api.telegram.org/bot'+ os.environ['TG_TOKEN'] + '/sendMessage'
+url = 'https://enlesz7htgigo.x.pipedream.net/bot'+ os.environ['TG_TOKEN'] + '/sendMessage'
 payload = {'chat_id': os.environ['CHAT_ID'], 'parse_mode': 'markdown', 'disable_web_page_preview': True, 'text': os.environ['TEXT']} 
 json_payload =  json.dumps(payload).encode('utf8')
 
