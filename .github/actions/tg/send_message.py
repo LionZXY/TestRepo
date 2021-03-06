@@ -1,16 +1,13 @@
-import http.client
-import json
+import telegram
 import os
 
+token = os.environ["INPUT_TOKEN"]
+text = os.environ["INPUT_TEXT"]
+chat_id = os.environ["INPUT_CHAT_ID"]
 
-text = os.environ['TEXT']
-print(text)
-payload = {'chat_id': os.environ['CHAT_ID'], 'parse_mode': 'markdown', 'disable_web_page_preview': True, 'text': str(text)} 
-json_payload =  json.dumps(payload, ensure_ascii=False, encoding='utf8')
+bot = telegram.Bot(token=token)
 
-print(json_payload)
-
-conn = http.client.HTTPSConnection('api.telegram.org')
-conn.request("POST", '/bot'+ os.environ['TG_TOKEN'] + '/sendMessage', json_payload, {'Content-Type': 'application/json'})
-response = conn.getresponse()
-print(json.loads(response.read().decode()))
+bot.sendMessage(chat_id=chat_id,
+                text=text,
+                parse_mode='markdown',
+                disable_web_page_preview=True)

@@ -1,4 +1,5 @@
 name: 'Send message to Telegram'
+description: 'Action for send message in Telegram'
 inputs:
   token:
     description: "Token bot"
@@ -6,13 +7,10 @@ inputs:
   text:
     description: 'The message that will be sent to telegram.'
     required: true
-description: 'Action for send message in Telegram'
+  chat_id:
+    description: 'Chat id to relay message'
+    required: false
+    default: '-324719594'
 runs:
-  using: 'composite'
-  steps:
-    - run: python3 $GITHUB_ACTION_PATH/send_message.py
-      env:
-        TG_TOKEN: ${{ inputs.token }}
-        CHAT_ID: -324719594
-        TEXT: ${{ inputs.text }}
-      shell: bash
+  using: "docker"
+  image: "Dockerfile"
