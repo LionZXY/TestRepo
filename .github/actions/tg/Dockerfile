@@ -4,6 +4,6 @@ WORKDIR /tg/
 
 RUN pip install python-telegram-bot
 
-COPY send_message.py send_message.py
+COPY send_message.py /tg/send_message.py
 
-ENTRYPOINT ["send_message.py"]
+ENTRYPOINT ["/tg/send_message.py"]
