@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Send FCM notification
-        uses: ./.github/actions/submit_sdk
+        uses: ./.github/actions/send_notifications
         with:
           google-credentials: ${{ secrets.GOOGLE_CREDENTIALS }}
           firmware-version: 0.98.2
