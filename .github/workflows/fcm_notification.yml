@@ -13,4 +13,12 @@ jobs:
         with:
           credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
           token_format: "access_token"
-      - run: echo ${{ steps.google_auth.outputs.access_token }}
+          create_credentials_file: false
+      - name: Send FCM notification
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: 'https://fcm.googleapis.com/v1/projects/flippertestnotification/messages:send'
+          method: 'POST'
+          bearerToken: ${{ steps.google_auth.outputs.access_token }}
+          customHeaders: '{"Content-Type": "application/json"}'
+          data: '{"message":{"notification":{"title":"FCM Message","body":"This is an FCM Message"},"token":"fCyYz-A6RlWlGO1JVYhfdD:APA91bGC_av1eO44IJDhiW2JnXNpaQj02Xe_6hawTmcp_Vw3-ZhY4gRLLL8p1PIsxNj1N9bvKxL9vCrKxouOSIgKE3grvS7DMziLC5BxyffAmC2cAX6sEmq5i7boDbup6wR0B2-sgLwy"}}'
