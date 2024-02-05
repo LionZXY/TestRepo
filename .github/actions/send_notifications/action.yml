@@ -14,13 +14,16 @@ inputs:
 runs:
   using: composite
   steps:
-    - uses: 'google-github-actions/auth@v2'
+    - name: Auth in Google Cloud
+      uses: 'google-github-actions/auth@v2'
       id: google_auth
       with:
         credentials_json: '${{ inputs.google-credentials }}'
         token_format: "access_token"
         create_credentials_file: false
-    - run: |
+    - name: Send push to FCM
+      shell: bash
+      run: |
         curl -X POST -H "Authorization: Bearer ${{ steps.google_auth.outputs.access_token }}" \
           -H "Content-Type: application/json" \
           -d '{"message":{"notification":{"title":"Firmware Update Available","body":"New firmware version is ready to install: ${{ inputs.firmware-version }}"},"condition":"'flipper_update_firmware_release' in topics"}}' \
