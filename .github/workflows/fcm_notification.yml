@@ -8,6 +8,7 @@ jobs:
     name: FCM Notification
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - name: Send FCM notification
         uses: ./.github/actions/send_notifications
         with:
