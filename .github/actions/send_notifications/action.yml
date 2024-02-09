@@ -21,10 +21,12 @@ runs:
         credentials_json: '${{ inputs.google-credentials }}'
         token_format: "access_token"
         create_credentials_file: false
-    - name: Send push to FCM
-      shell: bash
-      run: |
-        curl -X POST -H "Authorization: Bearer ${{ steps.google_auth.outputs.access_token }}" \
-          -H "Content-Type: application/json" \
-          -d '{"message":{"notification":{"title":"Firmware Update Available","body":"New firmware version is ready to install"}}}' \
-          https://fcm.googleapis.com/v1/projects/flippertestnotification/messages:send
+    - name: Send FCM notification
+      uses: fjogeleit/http-request-action@v1
+      with:
+        url: 'https://fcm.googleapis.com/v1/projects/flippertestnotification/messages:send'
+        method: 'POST'
+        bearerToken: ${{ steps.google_auth.outputs.access_token }}
+        customHeaders: '{"Content-Type": "application/json"}'
+        data: >
+          {"message":{"notification":{"title":"Firmware Update Available","body":"New firmware version is ready to install: 0.98.2"},"condition":"'flipper_update_firmware_release' in topics"}}
