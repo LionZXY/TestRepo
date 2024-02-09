@@ -26,5 +26,5 @@ runs:
       run: |
         curl -X POST -H "Authorization: Bearer ${{ steps.google_auth.outputs.access_token }}" \
           -H "Content-Type: application/json" \
-          -d '{"message":{"notification":{"title":"Firmware Update Available","body":"New firmware version is ready to install: ${{ inputs.firmware-version }}"},"condition":"'flipper_update_firmware_release' in topics"}}' \
+          -d '{"message":{"notification":{"title":"Firmware Update Available","body":"New firmware version is ready to install"}' \
           https://fcm.googleapis.com/v1/projects/flippertestnotification/messages:send
